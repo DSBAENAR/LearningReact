@@ -1,20 +1,14 @@
 import './App.css'
+import { TwitterFollowCard } from './TwitterFollowCard'
+import React from 'react'
 export function App() {
-    return(
-        <article className='tw-followcard'>
-            <header className='tw-followcard-header'>
-                <img className='tw-followcard-avatar'
-                src="https://unavatar.io/Facebook" alt="" />
-                <div className='tw-followcard-info'>
-                    <strong>Meta</strong>
-                    <span className='tw-followcard-info-username'>@Meta</span>
-                </div>
-            </header>
-            <aside>
-                <button className='tw-followcard-btn-follow'>
-                    Seguir
-                </button>
-            </aside>
-        </article>
-    )
+return(
+    <>
+        <TwitterFollowCard username="Facebook" name="Meta" />
+        <TwitterFollowCard username="Google" name="Google" />
+        <TwitterFollowCard username="instagram" name="Instagram" />
+        <TwitterFollowCard username="Netflix" name="Netflix" />
+        <TwitterFollowCard username="Twitch" name="twitch" />
+    </>
+)
 }
