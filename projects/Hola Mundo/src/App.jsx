@@ -1,11 +1,11 @@
 import './App.css'
 import Board from './Board'
-import { TwitterFollowCard } from './TwitterFollowCard'
 import React from 'react'
+import GameRoom from './Game'
 export function App() {
 return(
     <>
-    <Board/>
+      <GameRoom roomId="sala-1" player="X" wsUrl="http://localhost:8080/ws" />
     </>
 )
 }

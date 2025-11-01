@@ -8,6 +8,12 @@
   </head>
   <body>
     <div id="root"></div>
+    <!-- Polyfill `global` early so libraries like sockjs-client don't throw in the browser -->
+    <script>
+      if (typeof global === 'undefined') {
+        window.global = window;
+      }
+    </script>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

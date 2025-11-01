@@ -1,8 +1,10 @@
 import { useState } from "react"
 import { Square } from "./Square"
-export default function Board() {
-  const [squares, setSquares] = useState(Array(9).fill(null));
+
+export default function Board({ squares: propSquares, onMove, roomId, playerId }) {
+  const [localSquares, setLocalSquares] = useState(Array(9).fill(null));
   const [xIsNext, setXIsNext] = useState(true);
+  const squares = propSquares ?? localSquares;
 
   const result = calculateWinner(squares);
   const winner = result ? result.winner : null;
@@ -10,9 +12,14 @@ export default function Board() {
 
   function handleClick(i) {
     if (squares[i] || winner) return;
+    if (onMove) {
+      onMove(i);
+      return;
+    }
+
     const nextSquares = squares.slice();
     nextSquares[i] = xIsNext ? 'X' : 'O';
-    setSquares(nextSquares);
+    setLocalSquares(nextSquares);
     setXIsNext(!xIsNext);
   }
 
@@ -41,12 +48,10 @@ export default function Board() {
     );
   });
 
-  // compute SVG line coordinates (percent) for the winning line
   const lineCoords = winningLine.length === 3 ? (() => {
     const indexToPos = (i) => {
       const row = Math.floor(i / 3);
       const col = i % 3;
-      // positions centered at 1/6, 3/6, 5/6 (16.6667%, 50%, 83.3333%)
       const x = ((col * 2 + 1) / 6) * 100;
       const y = ((row * 2 + 1) / 6) * 100;
       return { x, y };
